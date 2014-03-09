@@ -4,18 +4,49 @@
  *
  */
 require(["jquery.jsonp-2.1.4.min.js","sprintf-0.7-beta1.js"],function(){
-	var list, albumViewer, i = 0;
-	window.albumCoverCollection = [];
+	var list;
+	var albumViewer;
+	var i = 0;
+	var albumCoverCollection = [];
+	
 
+	/**
+	 *  Album Cover Object Type
+	 *	@class
+	 *	@returns	{object|AlbumCover}
+	 */
 	function AlbumCover(o){
-        if (typeof o === "object") {
-            this.title = o.title || null;
-            this.source = o.source || null;
-            this.thumbnail = o.thumbnail || null;
-            this.img = o.img || null;
-            this.rId = o.rId || null;
-            this.rName = o.rName || null;
+		
+		/** Title of Album */
+		this.title;
+		
+		/** Source FIXME comment is incomplete */
+		this.source;
+		
+		/** Thumbnail image */
+		this.thumbnail;
+		
+		/** Fully qualified image url */
+		this.img;
+		
+		/** Reddit post id */
+		this.rId;
+		
+		/** Reddit post name */
+		this.rName;
+		
+		
+		// leave if we cannot populate the object
+        if (typeof o !== "object") {
+        	return;
         }
+        
+        this.title = o.title || null;
+        this.source = o.source || null;
+        this.thumbnail = o.thumbnail || null;
+        this.img = o.img || null;
+        this.rId = o.rId || null;
+        this.rName = o.rName || null;
 	}
 
 	albumCoverCollection.saveJson = function(json){
