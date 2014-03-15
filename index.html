@@ -2,13 +2,9 @@
 <head>
 	<title>JSONP Test</title>
 	<script type="text/javascript" src="http://www.modernizr.com/downloads/modernizr-latest.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-	<script type="text/javascript" src="js/require.js"></script>
-	<script type="text/javascript">
-		
-	</script>
-	<script type="text/javascript" src="js/jsonp.js"></script>
+	
 	<style type="text/css">
+		/* TODO Move to separate css file */
 		.grid-flow{display:block; float:left; margin-right:15px;}
 		.width-25{width:25%;}
 
@@ -35,17 +31,27 @@
 	</style>
 </head>
 <body>
-	<div id="albums">
+
+	<main id="albums">
+	
 		<h1>JSONP Test with Album Covers!</h1>
-		<div id="results" class="grid-flow">
+		
+		<section id="results" class="grid-flow">
 			<ul id="results-list"></ul>
 			<a id="results-list-anchor" href="#">Load More</a>
-		</div>
-		<div id="view" class="grid-flow">
+		</section>
+		
+		<Section id="view" class="grid-flow">
 			<h2 id="view-title"></h2>
 			<img id="view-img" src="" />
-		</div>
-	</div>
+		</section>
+		
+	</main>
+	
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script type="text/javascript" src="js/require.js"></script>
+	<script type="text/javascript" src="js/jsonp.js"></script>
+	
 </body>
 
 </html>
