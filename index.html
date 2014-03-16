@@ -1,56 +1,28 @@
 <!doctype html>
 <head>
-	<title>JSONP Test</title>
+	<title>Album Cover Viewer</title>
 	<script type="text/javascript" src="http://www.modernizr.com/downloads/modernizr-latest.js"></script>
-	
-	<style type="text/css">
-		/* TODO Move to separate css file */
-		.grid-flow{display:block; float:left; margin-right:15px;}
-		.width-25{width:25%;}
-
-		#results{height: 500px; overflow: auto; padding: 10px 10px 10px 30px;
-
-		}
-		#results-list{list-style:none;margin:0;padding:0;width:300px;}
-		#results-list li{
-			cursor:pointer;
-			padding:10px;
-			-webkit-transition: all 0.3s ease;
-			-moz-transition: all 0.3s ease;
-			-o-transition: all 0.3s ease;
-			transition: all  0.3s ease;
-		}
-		#results-list li:hover{
-			background-color:green;
-			padding:20px;
-		}
-		#results-list .result-active{background-color:yellow;padding:20px;}
-		#results-list img{}
-		#view{width:65%;}
-		#view-img{display:none;width:100%;}
-	</style>
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
 </head>
 <body>
 
 	<main id="albums">
 	
-		<h1>JSONP Test with Album Covers!</h1>
+		<h1>Album Covers</h1>
 		
 		<section id="results" class="grid-flow">
 			<ul id="results-list"></ul>
 			<a id="results-list-anchor" href="#">Load More</a>
 		</section>
 		
-		<Section id="view" class="grid-flow">
+		<section id="view" class="grid-flow">
 			<h2 id="view-title"></h2>
 			<img id="view-img" src="" />
 		</section>
 		
 	</main>
 	
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-	<script type="text/javascript" src="js/require.js"></script>
-	<script type="text/javascript" src="js/jsonp.js"></script>
+	<script type="text/javascript" src="js/require.js" data-main="js/main"></script>
 	
 </body>
 

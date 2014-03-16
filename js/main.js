@@ -2,11 +2,10 @@
  *	Playing around with some jsonp from reddit.com
  *	@author Andrew Gatlabayan
  */
-require(['jquery.jsonp-2.1.4.min.js', 'sprintf-0.7-beta1.js'], function() {
+require(['js/libs/jquery-1.6.4.min.js', 'js/libs/jquery.jsonp-2.1.4.min.js', 'js/libs/sprintf-0.7-beta1.js'], function() {
 
 var list;
 var albumCoverCollection = [];
-window.albumCoverCollection = albumCoverCollection;
 
 /**
  *  Album Cover Object Type

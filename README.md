@@ -2,15 +2,21 @@ Album Art App
 =============
 
 This fully client side web app will display popular album covers from the subreddit.
-I started this project to better learn the RequireJS.
+I started this project to better learn the RequireJS. The application currently
+relies heavily on jQuery and the plugin jQuery.jsonp.
 
 How to run
 ----------
-  Open ```./index.html``` in your any browser.
+Open ```./index.html``` in any browser.
+
+How to test
+-----------
+Open ```./tests/index.html``` in any browser
 
 Road map
 --------
 Let's re-use this app to test out other new and interesting javascript frameworks.
+
 
 TODO
 ----
