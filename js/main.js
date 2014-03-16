@@ -42,10 +42,14 @@ function AlbumCover(options) {
 }
 
 
-albumCoverCollection.addAlbum = function(options) {
+albumCoverCollection.addAlbum = function ( options ) {
 
-    if (!options) {
-        console.error('Cannot add an empty album');
+    if ( !options ) {
+        console.error( 'Cannot add an empty album' );
+    }
+
+    if ( options.url.indexOf( 'jpg' ) === -1 ) {
+        options.url = options.url + '.jpg';
     }
 
     return this.push(new AlbumCover({
