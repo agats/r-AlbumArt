@@ -8,7 +8,7 @@ require( [ 'jquery.jsonp-2.1.4.min.js' , 'sprintf-0.7-beta1.js' ], function ( ) 
 	var albumViewer;
 	var i = 0;
 	var albumCoverCollection = [];
-
+	window.albumCoverCollection = albumCoverCollection;
 
 	/**
 	 *  Album Cover Object Type
@@ -70,7 +70,7 @@ require( [ 'jquery.jsonp-2.1.4.min.js' , 'sprintf-0.7-beta1.js' ], function ( ) 
 		list = json;
 
 		for( var i = 0; i < results.length; i++ ) {
-            var albumData = results[index].data || null;
+            var albumData = results[ i ].data || null;
 
             if ( !albumData ) {
                 continue;
