@@ -21,8 +21,10 @@ Let's re-use this app to test out other new and interesting javascript framework
 TODO
 ----
 * Clean up HTML
-* Semantic HTML
-	* Clean up RequireJS implementation, start application from the RequireJS script include.
+	* Semantic HTML
+* Clean up CSS
+	* use box-sizing on everything
+	* fix CSSLint errors
 * Clean up JS
 	* Break ```./js/jsonp.js``` into CommonJS modules
 * Create javascript unit tests
