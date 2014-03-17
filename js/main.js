@@ -2,7 +2,7 @@
  *	Playing around with some jsonp from reddit.com
  *	@author Andrew Gatlabayan
  */
-require(['js/libs/jquery-1.6.4.min.js', 'js/libs/jquery.jsonp-2.1.4.min.js', 'js/libs/sprintf-0.7-beta1.js'], function() {
+require(['js/libs/jquery-2.1.0.min.js'], function() {
 
 var list;
 var albumCoverCollection = [];
@@ -85,25 +85,30 @@ albumCoverCollection.getAlbum = function(index) {
 };
 
 
-albumCoverCollection.pullNext = function(callBack) {
+albumCoverCollection.pullNext = function ( options ) {
 
     var lastAlbum = this.getAlbum(this.length - 1);
     // FIXME this code is confusing, refactor to clearly build the url string
     var rName = (lastAlbum) ? '&after=' + lastAlbum.rName : '';
 
-    $.jsonp({
+    $.ajax({
         url: 'http://www.reddit.com/r/AlbumArtPorn/.json?limit=15' + rName + '&jsonp=saveJson',
-        callbackParameter: '',
+        async: true,
+        dataType: 'jsonp',
+        crossDomain: true,
         beforeSend: function() {
+            if ( typeof options.beforeSend === 'function' ) {
+                options.beforeSend();
+            }
             // FIXME this should be in the View
             $("#albums h1:first").append(" | LOADING!");
         },
         complete: function() {
+            if ( typeof options.complete === 'function' ) {
+                options.complete();
+            }
             // FIXME this should be in the View
             $("#albums h1:first").text($("#albums h1:first").text().replace(" | LOADING!", ""));
-            if (typeof callBack === "function") {
-                callBack();
-            }
         }
     });
 
@@ -133,6 +138,9 @@ $(document).ready(function() {
 
         // Main View's Title
         var _viewTitle = _viewPane.find('#view-title');
+
+        // Header's container
+        var _viewHeader = $( '$album' );
 
         // Current Album ID
         var _currentAlbum = 0;
@@ -195,6 +203,9 @@ $(document).ready(function() {
             .append('<span id="view-loading-spinner">Loading</span>');
 
 
+        // Header View's Events
+        // ====================
+
         // Init
         albumCoverCollection.pullNext();
         _viewImg.show();
@@ -203,11 +214,10 @@ $(document).ready(function() {
             updateListPane: function() {
 
                 for (var i = _currentAlbum; i < albumCoverCollection.length; i++) {
+                    var currAlbum = albumCoverCollection.getAlbum( i );
+
                     _listPane.append(
-                        sprintf(
-                            '<li><img src="%(thumbnail)s" acc-id="' + i + '" alt="%(title)s"/>%(title)s</li>',
-                            albumCoverCollection.getAlbum(i)
-                        )
+                        '<li><img src="' + currAlbum.thumbnail + '" acc-id="' + i + '" alt="' + currAlbum.title + '"/>' + currAlbum.title + '</li>'
                     );
                 }
 
