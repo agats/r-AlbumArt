@@ -95,6 +95,9 @@ albumCoverCollection.pullNext = function ( options ) {
     // FIXME this code is confusing, refactor to clearly build the url string
     var rName = (lastAlbum) ? '&after=' + lastAlbum.rName : '';
 
+    options.beforeSend = options.beforeSend || null;
+    options.complete = options.complete || null;
+
     $.ajax({
         url: 'http://www.reddit.com/r/AlbumArtPorn/.json?limit=15' + rName + '&jsonp=saveJson',
         async: true,
@@ -104,15 +107,11 @@ albumCoverCollection.pullNext = function ( options ) {
             if ( typeof options.beforeSend === 'function' ) {
                 options.beforeSend();
             }
-            // FIXME this should be in the View
-            $("#albums h1:first").append(" | LOADING!");
         },
         complete: function() {
             if ( typeof options.complete === 'function' ) {
                 options.complete();
             }
-            // FIXME this should be in the View
-            $("#albums h1:first").text($("#albums h1:first").text().replace(" | LOADING!", ""));
         }
     });
 
@@ -144,7 +143,7 @@ $(document).ready(function() {
         var _viewTitle = _viewPane.find('#view-title');
 
         // Header's container
-        var _viewHeader = $( '$album' );
+        var _viewHeader = $( 'header' );
 
         // Current Album ID
         var _currentAlbum = 0;
@@ -180,7 +179,14 @@ $(document).ready(function() {
             })
             .end().find('#results-list-anchor').bind('click.album', function(e) {
                 e.preventDefault();
-                albumCoverCollection.pullNext();
+                albumCoverCollection.pullNext( {
+                    beforeSend: function () {
+                        _viewHeader.trigger( 'interactive' );
+                    },
+                    complete: function () {
+                        _viewHeader.trigger( 'ready' );
+                    }
+                } );
             });
 
 
@@ -209,10 +215,27 @@ $(document).ready(function() {
 
         // Header View's Events
         // ====================
+        _viewHeader
+            .bind( 'interactive.album', function ( e ) {
+                $( this ).find( 'h1' ).append(" | LOADING!");
+            })
+            .bind( 'ready.album', function ( e ) {
+                var titleEl = $( this ).find( 'h1' );
+                titleEl.text( titleEl.text().replace(' | LOADING!', '') );
+            });
+
 
         // Init
-        albumCoverCollection.pullNext();
+        albumCoverCollection.pullNext( {
+            beforeSend: function () {
+                _viewHeader.trigger( 'interactive' );
+            },
+            complete: function () {
+                _viewHeader.trigger( 'ready' );
+            }
+        } );
         _viewImg.show();
+
 
         return {
             updateListPane: function() {
