@@ -7,11 +7,11 @@ relies heavily on jQuery and the plugin jQuery.jsonp.
 
 How to run
 ----------
-Open ```./index.html``` in any browser.
+Open `./index.html` in any browser.
 
 How to test
 -----------
-Open ```./tests/index.html``` in any browser
+Open `./tests/index.html` in any browser
 
 Road map
 --------
@@ -26,7 +26,7 @@ TODO
 	* use box-sizing on everything
 	* fix CSSLint errors
 * Clean up JS
-	* Break ```./js/jsonp.js``` into CommonJS modules
+	* Break `./js/jsonp.js` into CommonJS modules
 * Create javascript unit tests
 
 
