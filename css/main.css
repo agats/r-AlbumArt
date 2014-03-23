@@ -1,44 +1,82 @@
 /**
-	Album Viewer Styles
+    Album Viewer Styles
+*/
+
+/* apply a natural box layout model to all elements */
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+/*
+    Layout Utils
+    ============
 */
 .grid-flow {
-	display:block;
-	float:left;
-	margin-right:15px;
+    display:block;
+    float:left;
+    margin-right:15px;
 }
 .width-25 {
-	width:25%;
+    width:25%;
 }
 
+
+/*
+    Main Results
+    ============
+*/
 #results {
-	height: 500px;
-	overflow: auto;
-	padding: 10px 10px 10px 30px;
+    height: 500px;
+    overflow: auto;
+    padding: 10px 10px 10px 30px;
 }
 
+
+/*
+    Main Results List
+    =================
+*/
 #results-list {
-	list-style:none;margin:0;padding:0;width:300px;}
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 300px;
+}
+
 #results-list li {
-	cursor:pointer;
-	padding:10px;
-	-webkit-transition: all 0.3s ease;
-	-moz-transition: all 0.3s ease;
-	-o-transition: all 0.3s ease;
-	transition: all  0.3s ease;
+    cursor: pointer;
+    padding: 10px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all  0.3s ease;
 }
+
 #results-list li:hover {
-	background-color:green;
-	padding:20px;
+    background-color: green;
+    padding: 20px;
 }
+
 #results-list .result-active {
-	background-color:yellow;
-	padding:20px;
+    background-color: yellow;
+    padding: 20px;
 }
-#results-list img {}
+#results-list img {
+    width: 70px;
+}
+
+
+/*
+    Main View Section
+    =================
+*/
 #view {
-	width:65%;
+    width: 65%;
 }
 #view-img{
-	display:none;
-	width:100%;
+    display: none;
+    width: 100%;
 }
