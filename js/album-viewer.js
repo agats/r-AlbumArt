@@ -7,9 +7,10 @@ define(
     [ 'js/libs/jquery-2.1.0.min.js', 'album-cover-collection' ],
     function( jQuery, albumCoverCollection ) {
 
+
     // Header's container
     var _viewHeader = $( 'header' );
-    
+
     // Main View
     var _viewPane = $('#view');
 
@@ -29,32 +30,28 @@ define(
     // List View's Events
     // ==================
     _listPane
-        .bind('click.album', function(e) {
+        .bind( 'click.album', function( e ) {
 
-            var $this = $(e.target),
-                album;
+            var $this = $( e.target );
+            var album;
 
-            if ($this.attr('acc-id')) {
+            if ( $this.attr( 'acc-id' ) ) {
                 _viewPane.trigger('interactive.album ');
+                album = albumCoverCollection.getAlbum( $this.attr( 'acc-id' ) );
 
-                album = albumCoverCollection.getAlbum($this.attr('acc-id'));
+                _viewImg.attr( 'src', album.img );
+                _viewTitle.text( album.title );
 
-                _viewImg.attr('src', album.img);
+                $this.parent().siblings( '.result-active' )
+                    .removeClass( 'result-active' )
+                    .end().addClass( 'result-active' );
 
-                _viewTitle.text(album.title);
-
-                $this.parent().siblings('.result-active')
-                    .removeClass('result-active')
-                    .end().addClass('result-active');
-
-            } else if (e.target.tagName === 'LI') {
-
-                $this.find('img').trigger('click.album');
-
+            } else if ( e.target.tagName === 'LI' ) {
+                $this.find( 'img' ).trigger( 'click.album' );
             }
 
         })
-        .end().find('#results-list-anchor').bind('click.album', function(e) {
+        .end().find( '#results-list-anchor' ).bind( 'click.album', function( e ) {
             e.preventDefault();
             albumCoverCollection.pullNext( {
                 beforeSend: function () {
@@ -69,32 +66,32 @@ define(
 
     // Main View Image's Events
     // ==================
-    _viewImg.bind('load.album', function(e) {
-        _viewPane.trigger('ready.album');
+    _viewImg.bind( 'load.album', function( e ) {
+        _viewPane.trigger( 'ready.album' );
     });
 
 
     // Main View's Events
     // ==================
     _viewPane
-        .bind('interactive.album', function(e) {
-            $(this)
+        .bind( 'interactive.album', function( e ) {
+            $( this )
                 .children().hide()
-                .filter('#view-loading-spinner').show();
+                .filter( '#view-loading-spinner' ).show();
         })
-        .bind('ready.album', function(e) {
-            $(this)
+        .bind( 'ready.album', function( e ) {
+            $( this )
                 .children().show()
-                .filter('#view-loading-spinner').hide();
+                .filter( '#view-loading-spinner' ).hide();
         })
-        .append('<span id="view-loading-spinner">Loading</span>');
+        .append( '<span id="view-loading-spinner">Loading</span>' );
 
 
     // Header View's Events
     // ====================
     _viewHeader
         .bind( 'interactive.album', function ( e ) {
-            $( this ).find( 'h1' ).append(" | LOADING!");
+            $( this ).find( 'h1' ).append( ' | LOADING!' );
         })
         .bind( 'ready.album', function ( e ) {
             var titleEl = $( this ).find( 'h1' );
@@ -118,14 +115,19 @@ define(
 
             for (var i = _currentAlbum; i < albumCoverCollection.length; i++) {
                 var currAlbum = albumCoverCollection.getAlbum( i );
+                var thumbnail = currAlbum.thumbnail;
+
+                if ( thumbnail === 'nsfw' ) {
+                    thumbnail = '';
+                }
 
                 _listPane.append(
-                    '<li><img src="' + currAlbum.thumbnail + '" acc-id="' + i + '" alt="' + currAlbum.title + '"/>' + currAlbum.title + '</li>'
+                    '<li><img width="70" src="' + thumbnail + '" acc-id="' + i + '" alt="' + currAlbum.title + '"/>' + currAlbum.title + '</li>'
                 );
             }
 
             if (_currentAlbum === 0) {
-                _listPane.find('img:first').trigger('click');
+                _listPane.find( 'img:first' ).trigger( 'click' );
             }
 
             // FIXME this doesn't make sense, how the length _currentAlbum?
@@ -136,7 +138,7 @@ define(
             return _currentAlbum;
         },
         changeView: function(url) {
-            _viewImg.attr("src", url);
+            _viewImg.attr( 'src', url );
         }
     };
 

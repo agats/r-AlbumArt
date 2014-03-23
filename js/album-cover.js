@@ -1,3 +1,7 @@
+/**
+ *  Album Cover Object
+ *  @module AlbumCover
+ */
 define( function() {
 
 /**
@@ -6,11 +10,11 @@ define( function() {
  *	@param		{object} options
  *	@returns	{object|AlbumCover}
  */
-function AlbumCover(options) {
+function AlbumCover( options ) {
 
     // leave if we cannot populate the object
-    if (typeof options !== 'object') {
-        console.error('No data to create an album cover from');
+    if ( typeof options !== 'object' ) {
+        console.error( 'No data to create an album cover from' );
         return null;
     }
 

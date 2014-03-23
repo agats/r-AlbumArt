@@ -10,23 +10,24 @@ albumCoverCollection.addAlbum = function ( options ) {
         console.error( 'Cannot add an empty album' );
     }
 
+    // Force extenstion
     if ( options.url.indexOf( 'jpg' ) === -1 ) {
         options.url = options.url + '.jpg';
     }
 
-    return this.push(new AlbumCover({
+    return this.push( new AlbumCover( {
         title: options.title,
         source: 'http://www.reddit.com' + options.permalink,
         thumbnail: options.thumbnail,
         img: options.url,
         rId: options.subreddit_id,
         rName: options.name
-    }));
+    } ) );
 
 };
 
 
-albumCoverCollection.saveJson = function(json) {
+albumCoverCollection.saveJson = function( json ) {
 
     var results = json.data.children;
     var list = json;
@@ -34,19 +35,19 @@ albumCoverCollection.saveJson = function(json) {
     for (var i = 0; i < results.length; i++) {
         var albumData = results[i].data || null;
 
-        if (!albumData) {
+        if ( !albumData ) {
             continue;
         }
 
-        albumCoverCollection.addAlbum(albumData);
+        albumCoverCollection.addAlbum( albumData );
 
     }
 
 };
 
 
-albumCoverCollection.getAlbum = function(index) {
-    return this[index] || false;
+albumCoverCollection.getAlbum = function( index ) {
+    return this[ index ] || false;
 };
 
 
@@ -54,13 +55,13 @@ albumCoverCollection.pullNext = function ( options ) {
 
     var lastAlbum = this.getAlbum(this.length - 1);
     // FIXME this code is confusing, refactor to clearly build the url string
-    var rName = (lastAlbum) ? '&after=' + lastAlbum.rName : '';
+    var rName = ( lastAlbum ) ? '&after=' + lastAlbum.rName : '';
 
     options.beforeSend = options.beforeSend || null;
     options.complete = options.complete || null;
 
     // TODO: Move this to a new module
-    $.ajax({
+    $.ajax( {
         url: 'http://www.reddit.com/r/AlbumArtPorn/.json?limit=15' + rName + '&jsonp=saveJson',
         async: true,
         dataType: 'jsonp',
@@ -75,7 +76,7 @@ albumCoverCollection.pullNext = function ( options ) {
                 options.complete();
             }
         }
-    });
+    } );
 
 };
 
