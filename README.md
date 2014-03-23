@@ -17,6 +17,12 @@ Road map
 --------
 Let's re-use this app to test out other new and interesting javascript frameworks.
 
+* Javascript Frameworks
+	* AngularJS
+	* Ember.js
+	* Durandal.js
+	* React.js
+
 
 TODO
 ----
