@@ -7,6 +7,7 @@ require(
     function( jQuery, albumCoverCollection, albumViewer ) {
 
     // Callback function used by JSONP request
+    // This currently used in albumCoverCollection.pullNext
     window.saveJson = function ( json ) {
         albumCoverCollection.saveJson( json );
         albumViewer.updateListPane();

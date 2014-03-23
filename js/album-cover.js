@@ -1,3 +1,7 @@
+/**
+ *  Album Cover Object
+ *  @module AlbumCover
+ */
 define( function() {
 
 /**
