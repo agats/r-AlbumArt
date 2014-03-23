@@ -4,8 +4,6 @@ define(
 
 var albumCoverCollection = [];
 
-debugger;
-
 albumCoverCollection.addAlbum = function ( options ) {
 
     if ( !options ) {
@@ -61,6 +59,7 @@ albumCoverCollection.pullNext = function ( options ) {
     options.beforeSend = options.beforeSend || null;
     options.complete = options.complete || null;
 
+    // TODO: Move this to a new module
     $.ajax({
         url: 'http://www.reddit.com/r/AlbumArtPorn/.json?limit=15' + rName + '&jsonp=saveJson',
         async: true,
