@@ -26,7 +26,7 @@ albumCoverCollection.addAlbum = function ( options ) {
 
 };
 
-
+// TODO move this to album-viewer
 albumCoverCollection.saveJson = function( json ) {
 
     var results = json.data.children;
@@ -51,6 +51,7 @@ albumCoverCollection.getAlbum = function( index ) {
 };
 
 
+// TODO move this album-viewer
 albumCoverCollection.pullNext = function ( options ) {
 
     var lastAlbum = this.getAlbum(this.length - 1);
@@ -60,7 +61,6 @@ albumCoverCollection.pullNext = function ( options ) {
     options.beforeSend = options.beforeSend || null;
     options.complete = options.complete || null;
 
-    // TODO: Move this to a new module
     $.ajax( {
         url: 'http://www.reddit.com/r/AlbumArtPorn/.json?limit=15' + rName + '&jsonp=saveJson',
         async: true,
