@@ -7,7 +7,22 @@ define(
     [ 'js/libs/jquery-2.1.0.min.js', 'album-cover-collection' ],
     function( jQuery, albumCoverCollection ) {
 
+/* TODO
+    - Refactor variables names, remove underscores
+    - Refactor selector name, use `js-` naming pattern
+    - Refactor `_listPane` to use a more explist selector, maybe `js-album-list`
+    
+    Re-architecture
+    ---------------
+    This module is a mix of the MVC view and controller. The view logic should be abstrated out.
+    This module will become the controller.
+    Possible view modules
+        - view-header
+        - view-pane
+        - view-image
+        - view-title
 
+*/
     // Header's container
     var _viewHeader = $( 'header' );
 
@@ -15,10 +30,10 @@ define(
     var _viewPane = $('#view');
 
     // Main View's Image
-    var _viewImg = _viewPane.find('#view-img');
+    var _viewImg = $('#view-img');
 
     // Main View's Title
-    var _viewTitle = _viewPane.find('#view-title');
+    var _viewTitle = $('#view-title');
 
     // List View
     var _listPane = $('#results').find('ul');
@@ -35,10 +50,13 @@ define(
             var $this = $( e.target );
             var album;
 
+// TODO update to use `data-` attribute
             if ( $this.attr( 'acc-id' ) ) {
                 _viewPane.trigger('interactive.album ');
+// FIXME getting the same `attr` twice here
                 album = albumCoverCollection.getAlbum( $this.attr( 'acc-id' ) );
 
+// TODO view modules will now need to listen to model events
                 _viewImg.attr( 'src', album.img );
                 _viewTitle.text( album.title );
 
