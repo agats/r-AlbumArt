@@ -61,9 +61,9 @@ define(
                 _viewImg.attr( 'src', album.img );
                 _viewTitle.text( album.title );
 
-                $this.parent().siblings( '.result-active' )
-                    .removeClass( 'result-active' )
-                    .end().addClass( 'result-active' );
+                // $this.parent().siblings( '.result-active' )
+                //     .removeClass( 'result-active' )
+                //     .end().addClass( 'result-active' );
 
             } else if ( e.target.tagName === 'LI' ) {
                 $this.find( 'img' ).trigger( 'click.album' );
