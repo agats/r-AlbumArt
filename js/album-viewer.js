@@ -69,18 +69,23 @@ define(
                 $this.find( 'img' ).trigger( 'click.album' );
             }
 
-        })
-        .end().find( '#results-list-anchor' ).bind( 'click.album', function( e ) {
-            e.preventDefault();
-            myAlbumCovers.pullNext( {
-                beforeSend: function () {
-                    _viewHeader.trigger( 'interactive' );
-                },
-                complete: function () {
-                    _viewHeader.trigger( 'ready' );
-                }
-            } );
         });
+
+
+    // Load More Link
+    // ==============
+    var loadMoreLink = _listPane.find( '#results-list-anchor');
+    loadMoreLink.bind( 'click.album', function( e ) {
+        e.preventDefault();
+        myAlbumCovers.pullNext( {
+            beforeSend: function () {
+                _viewHeader.trigger( 'interactive' );
+            },
+            complete: function () {
+                _viewHeader.trigger( 'ready' );
+            }
+        } );
+    });
 
 
     // Main View Image's Events
