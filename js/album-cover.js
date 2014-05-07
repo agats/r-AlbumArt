@@ -1,43 +1,33 @@
 /**
  *  Album Cover Object
- *  @module AlbumCover
+ *  @module albumCover
  */
 define( function() {
 
 /**
  *  Album Cover Object Type
- *	@class
- *	@param		{object} options
- *	@returns	{object|AlbumCover}
  */
-function AlbumCover( options ) {
-
-    // leave if we cannot populate the object
-    if ( typeof options !== 'object' ) {
-        console.error( 'No data to create an album cover from' );
-        return null;
-    }
+var albumCover = {
 
     /** Title of Album */
-    this.title = options.title || null;
+    title: null,
 
     /** Source FIXME comment is incomplete */
-    this.source = options.source || null;
+    source: null,
 
     /** Thumbnail image */
-    this.thumbnail = options.thumbnail || null;
+    thumbnail: null,
 
     /** Fully qualified image url */
-    this.img = options.img || null;
+    img: null,
 
     /** Reddit post id */
-    this.rId = options.rId || null;
+    rId: null,
 
     /** Reddit post name */
-    this.rName = options.rName || null;
+    rName: null
+};
 
-}
-
-return AlbumCover;
+return albumCover;
 
 });

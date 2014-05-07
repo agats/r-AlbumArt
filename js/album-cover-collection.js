@@ -1,10 +1,13 @@
 define(
 	[ 'js/libs/jquery-2.1.0.min.js', './album-cover' ],
-	function( jQuery, AlbumCover ) {
+	function( jQuery, albumCover ) {
 
 var albumCoverCollection = [];
 
+
 albumCoverCollection.addAlbum = function ( options ) {
+
+		var newAlbum = Object.create ( albumCover );
 
     if ( !options ) {
         console.error( 'Cannot add an empty album' );
@@ -15,22 +18,25 @@ albumCoverCollection.addAlbum = function ( options ) {
         options.url = options.url + '.jpg';
     }
 
-    return this.push( new AlbumCover( {
-        title: options.title,
-        source: 'http://www.reddit.com' + options.permalink,
-        thumbnail: options.thumbnail,
-        img: options.url,
-        rId: options.subreddit_id,
-        rName: options.name
-    } ) );
+		for( var prop in options ) {
+				newAlbum[ prop ] = options[ prop ]
+		}
+
+		// Create and update names for `albumCover` API
+		newAlbum.source	= 'http://www.reddit.com' + options.permalink;
+		newAlbum.img 		= options.url;
+		newAlbum.rId 		= options.subreddit_id;
+		newAlbum.rName 	= options.name;
+
+    return this.push( newAlbum );
 
 };
 
 // TODO move this to album-viewer
 albumCoverCollection.saveJson = function( json ) {
 
-    var results = json.data.children;
-    var list = json;
+    var results		= json.data.children;
+    var list			 = json;
 
     for (var i = 0; i < results.length; i++) {
         var albumData = results[i].data || null;

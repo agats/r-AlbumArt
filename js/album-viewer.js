@@ -11,7 +11,7 @@ define(
     - Refactor variables names, remove underscores
     - Refactor selector name, use `js-` naming pattern
     - Refactor `_listPane` to use a more explist selector, maybe `js-album-list`
-    
+
     Re-architecture
     ---------------
     This module is a mix of the MVC view and controller. The view logic should be abstrated out.
@@ -41,6 +41,8 @@ define(
     // Current Album ID
     var _currentAlbum = 0;
 
+    var myAlbumCovers = Object.create( albumCoverCollection );
+
 
     // List View's Events
     // ==================
@@ -54,7 +56,7 @@ define(
             if ( $this.attr( 'acc-id' ) ) {
                 _viewPane.trigger('interactive.album ');
 // FIXME getting the same `attr` twice here
-                album = albumCoverCollection.getAlbum( $this.attr( 'acc-id' ) );
+                album = myAlbumCovers.getAlbum( $this.attr( 'acc-id' ) );
 
 // TODO view modules will now need to listen to model events
                 _viewImg.attr( 'src', album.img );
@@ -71,7 +73,7 @@ define(
         })
         .end().find( '#results-list-anchor' ).bind( 'click.album', function( e ) {
             e.preventDefault();
-            albumCoverCollection.pullNext( {
+            myAlbumCovers.pullNext( {
                 beforeSend: function () {
                     _viewHeader.trigger( 'interactive' );
                 },
@@ -119,7 +121,7 @@ define(
 
     return {
         init: function() {
-            albumCoverCollection.pullNext( {
+            myAlbumCovers.pullNext( {
                 beforeSend: function () {
                     _viewHeader.trigger( 'interactive' );
                 },
@@ -131,8 +133,8 @@ define(
         },
         updateListPane: function() {
 
-            for (var i = _currentAlbum; i < albumCoverCollection.length; i++) {
-                var currAlbum = albumCoverCollection.getAlbum( i );
+            for (var i = _currentAlbum; i < myAlbumCovers.length; i++) {
+                var currAlbum = myAlbumCovers.getAlbum( i );
                 var thumbnail = currAlbum.thumbnail;
 
                 if ( thumbnail === 'nsfw' ) {
@@ -149,7 +151,7 @@ define(
             }
 
             // FIXME this doesn't make sense, how the length _currentAlbum?
-            _currentAlbum = albumCoverCollection.length;
+            _currentAlbum = myAlbumCovers.length;
 
         },
         getCurrentId: function() {
