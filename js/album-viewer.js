@@ -52,11 +52,10 @@ define(
             var $this = $( e.target );
             var album;
 
-// TODO update to use `data-` attribute
-            if ( $this.attr( 'acc-id' ) ) {
+            if ( $this.attr( 'data-album-id' ) ) {
                 _viewPane.trigger('interactive.album ');
 // FIXME getting the same `attr` twice here
-                album = myAlbumCovers.getAlbum( $this.attr( 'acc-id' ) );
+                album = myAlbumCovers.getAlbum( $this.attr( 'data-album-id' ) );
 
 // TODO view modules will now need to listen to model events
                 _viewImg.attr( 'src', album.img );
@@ -142,7 +141,7 @@ define(
                 }
 
                 _listPane.append(
-                    '<li><img width="70" src="' + thumbnail + '" acc-id="' + i + '" alt="' + currAlbum.title + '"/>' + currAlbum.title + '</li>'
+                    '<li><img width="70" src="' + thumbnail + '" data-album-id="' + i + '" alt="' + currAlbum.title + '"/>' + currAlbum.title + '</li>'
                 );
             }
 
