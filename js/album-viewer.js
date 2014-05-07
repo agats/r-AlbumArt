@@ -50,12 +50,12 @@ define(
         .bind( 'click.album', function( e ) {
 
             var $this = $( e.target );
+            var albumId = $this.attr( 'data-album-id' );
             var album;
 
-            if ( $this.attr( 'data-album-id' ) ) {
+            if ( albumId ) {
                 _viewPane.trigger('interactive.album ');
-// FIXME getting the same `attr` twice here
-                album = myAlbumCovers.getAlbum( $this.attr( 'data-album-id' ) );
+                album = myAlbumCovers.getAlbum( albumId );
 
 // TODO view modules will now need to listen to model events
                 _viewImg.attr( 'src', album.img );
